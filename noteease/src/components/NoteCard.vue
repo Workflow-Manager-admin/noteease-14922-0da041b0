@@ -6,6 +6,10 @@ const props = defineProps<{
   note: Note
 }>()
 
+defineEmits<{
+  (e: 'edit'): void
+}>()
+
 const notesStore = useNotesStore()
 
 const deleteNote = () => {
@@ -16,10 +20,10 @@ const deleteNote = () => {
 </script>
 
 <template>
-  <div class="note-card">
+  <div class="note-card" @click="$emit('edit')">
     <div class="note-header">
       <h3>{{ note.title }}</h3>
-      <button class="delete-button" @click="deleteNote">×</button>
+      <button class="delete-button" @click.stop="deleteNote">×</button>
     </div>
     <p class="note-content">{{ note.content }}</p>
     <div class="note-categories">
