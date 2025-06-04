@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useNotesStore } from '@/stores/notes'
+import type { Note } from '@/types/note'
 
 const handleKeydown = (event: KeyboardEvent) => {
   if (props.isOpen) {
