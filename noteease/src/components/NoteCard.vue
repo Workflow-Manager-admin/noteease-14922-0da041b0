@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Note } from '@/types/note'
+import type { Note } from '@/types/note'
 import { useNotesStore } from '@/stores/notes'
 
 const props = defineProps<{

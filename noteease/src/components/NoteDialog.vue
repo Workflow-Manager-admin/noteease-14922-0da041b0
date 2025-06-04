@@ -44,7 +44,7 @@ const selectedCategories = ref<string[]>([])
 
 const initializeForm = () => {
   if (props.noteId) {
-    const note = notesStore.notes.value.find(n => n.id === props.noteId)
+    const note = notesStore.notes.find((note: Note) => note.id === props.noteId)
     if (note) {
       title.value = note.title
       content.value = note.content
