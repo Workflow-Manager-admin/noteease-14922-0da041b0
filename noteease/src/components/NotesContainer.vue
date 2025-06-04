@@ -31,7 +31,7 @@ const closeDialog = () => {
         v-for="note in notesStore.filteredNotes"
         :key="note.id"
         :note="note"
-        @click="selectedNoteId = note.id; isDialogOpen = true"
+        @edit="selectedNoteId = note.id; isDialogOpen = true"
       />
     </div>
 
