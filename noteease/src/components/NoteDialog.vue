@@ -1,6 +1,24 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useNotesStore } from '@/stores/notes'
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (props.isOpen) {
+    if (event.key === 'Escape') {
+      emit('close')
+    } else if (event.key === 'Enter' && event.ctrlKey) {
+      saveNote()
+    }
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
 
 const notesStore = useNotesStore()
 
