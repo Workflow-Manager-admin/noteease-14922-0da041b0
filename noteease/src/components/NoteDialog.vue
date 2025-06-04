@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useNotesStore } from '@/stores/notes'
 
 const notesStore = useNotesStore()
@@ -13,10 +13,29 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
+watch(() => props.isOpen, (newValue) => {
+  if (newValue) {
+    initializeForm()
+  }
+})
+
 const title = ref('')
 const content = ref('')
 const categoryInput = ref('')
 const selectedCategories = ref<string[]>([])
+
+const initializeForm = () => {
+  if (props.noteId) {
+    const note = notesStore.notes.value.find(n => n.id === props.noteId)
+    if (note) {
+      title.value = note.title
+      content.value = note.content
+      selectedCategories.value = [...note.categories]
+    }
+  } else {
+    resetForm()
+  }
+}
 
 const addCategory = () => {
   if (categoryInput.value.trim()) {
